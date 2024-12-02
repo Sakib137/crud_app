@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-class AddNewProductScreen extends StatefulWidget {
-  const AddNewProductScreen({super.key});
+class UpdateProductScreen extends StatefulWidget {
+  const UpdateProductScreen({super.key});
 
   static const String name = "/add-new-product";
 
   @override
-  State<AddNewProductScreen> createState() => _AddNewProductScreenState();
+  State<UpdateProductScreen> createState() => _AddNewProductScreenState();
 }
 
-class _AddNewProductScreenState extends State<AddNewProductScreen> {
+class _AddNewProductScreenState extends State<UpdateProductScreen> {
   final TextEditingController _nameTEcontroller = TextEditingController();
   final TextEditingController _priceTEcontroller = TextEditingController();
   final TextEditingController _totalPriceTEcontroller = TextEditingController();
@@ -22,7 +22,7 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Center(
-          child: Text("Add new Product"),
+          child: Text("Update Product"),
         ),
       ),
       body: Padding(
@@ -116,7 +116,7 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
           ),
           ElevatedButton(
             onPressed: () {},
-            child: const Text("Add"),
+            child: const Text("Update"),
           ),
         ],
       ),

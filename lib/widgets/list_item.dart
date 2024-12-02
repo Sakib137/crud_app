@@ -1,5 +1,6 @@
 // Widget extraction
 
+import 'package:crudapp/screens/update_product_screen.dart';
 import 'package:flutter/material.dart';
 
 class listItem extends StatelessWidget {
@@ -22,8 +23,16 @@ class listItem extends StatelessWidget {
       ),
       trailing: Wrap(
         children: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.delete)),
-          IconButton(onPressed: () {}, icon: const Icon(Icons.edit)),
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.delete),
+          ),
+          IconButton(
+            onPressed: () {
+              Navigator.pushNamed(context, UpdateProductScreen.name);
+            },
+            icon: const Icon(Icons.edit),
+          ),
         ],
       ),
     );

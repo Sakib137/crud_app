@@ -18,9 +18,11 @@ class _CrudAppState extends State<ProductListScreen> {
           child: Text("Product List"),
         ),
       ),
-      body: ListView.builder(itemBuilder: (context, index) {
-        return const listItem();
-      }),
+      body: ListView.builder(
+          itemCount: 10,
+          itemBuilder: (context, index) {
+            return const listItem();
+          }),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.pushNamed(context, AddNewProductScreen.name);
