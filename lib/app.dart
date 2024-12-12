@@ -14,6 +14,7 @@ class App extends StatelessWidget {
       routes: {
         "/": (context) => const ProductListScreen(),
         AddNewProductScreen.name: (context) => const AddNewProductScreen(),
+        UpdateProductScreen.name: (context) => const UpdateProductScreen(),
       },
     );
   }

@@ -164,9 +164,11 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
       "UnitPrice": _priceTEcontroller.text.trim(),
     };
 
-    Response response = await post(uri,
-        headers: {"content-type": "aplication/json"},
-        body: jsonEncode(requestBody));
+    Response response = await post(
+      uri,
+      headers: {"content-type": "aplication/json"},
+      body: jsonEncode(requestBody),
+    );
 
     print(response.statusCode);
     print(response.body);

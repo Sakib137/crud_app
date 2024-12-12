@@ -10,10 +10,10 @@ class ProductListScreen extends StatefulWidget {
   const ProductListScreen({super.key});
 
   @override
-  State<ProductListScreen> createState() => _CrudAppState();
+  State<ProductListScreen> createState() => _ProductListScreenState();
 }
 
-class _CrudAppState extends State<ProductListScreen> {
+class _ProductListScreenState extends State<ProductListScreen> {
   List<Product> productList = [];
   bool _getProductListInProgress = false;
 
@@ -77,6 +77,7 @@ class _CrudAppState extends State<ProductListScreen> {
         );
         productList.add(product);
       }
+
       setState(() {});
     }
     _getProductListInProgress = false;
