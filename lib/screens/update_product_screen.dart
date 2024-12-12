@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class UpdateProductScreen extends StatefulWidget {
   const UpdateProductScreen({super.key});
 
-  static const String name = "/add-new-product";
+  static const String name = "/update-new-product";
 
   @override
   State<UpdateProductScreen> createState() => _AddNewProductScreenState();

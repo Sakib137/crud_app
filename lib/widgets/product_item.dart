@@ -12,7 +12,7 @@ class listItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Image.network(product.image ?? ""),
+      // leading: Image.network(product.image ?? ""),
       title: Text("Item name: ${product.productName ?? ""}"),
       subtitle: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

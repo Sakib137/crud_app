@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 
 class AddNewProductScreen extends StatefulWidget {
   const AddNewProductScreen({super.key});
@@ -18,6 +21,8 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
   final TextEditingController _codeTEcontroller = TextEditingController();
 
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+
+  bool _AddNewProductInProgress = false;
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +61,7 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
           TextFormField(
             controller: _priceTEcontroller,
             autovalidateMode: AutovalidateMode.onUserInteraction,
+            keyboardType: TextInputType.number,
             decoration: const InputDecoration(
               label: Text("Product Price"),
             ),
@@ -70,6 +76,7 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
           TextFormField(
             controller: _totalPriceTEcontroller,
             autovalidateMode: AutovalidateMode.onUserInteraction,
+            keyboardType: TextInputType.number,
             decoration: const InputDecoration(
               label: Text("Product Total Price"),
             ),
@@ -84,6 +91,7 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
           TextFormField(
             controller: _quantityTEcontroller,
             autovalidateMode: AutovalidateMode.onUserInteraction,
+            keyboardType: TextInputType.number,
             decoration: const InputDecoration(
               label: Text("Product Quantity"),
             ),
@@ -123,14 +131,81 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
               }
             },
           ),
-          ElevatedButton(
-            onPressed: () {
-              if (_formkey.currentState!.validate()) {}
-            },
-            child: const Text("Add"),
+          Visibility(
+            visible: _AddNewProductInProgress == false,
+            replacement: const Center(
+              child: CircularProgressIndicator(),
+            ),
+            child: ElevatedButton(
+              onPressed: () {
+                if (_formkey.currentState!.validate()) {
+                  _addNewProduct();
+                }
+              },
+              child: const Text("Add"),
+            ),
           ),
         ],
       ),
     );
+  }
+
+  Future<void> _addNewProduct() async {
+    _AddNewProductInProgress = true;
+    setState(() {});
+    Uri uri = Uri.parse("https://crud.teamrabbil.com/api/v1/CreateProduct");
+
+    Map<String, dynamic> requestBody = {
+      "Img": _imageTEcontroller.text.trim(),
+      "ProductCode": _codeTEcontroller.text.trim(),
+      "ProductName": _nameTEcontroller.text.trim(),
+      "Qty": _quantityTEcontroller.text.trim(),
+      "TotalPrice": _totalPriceTEcontroller.text.trim(),
+      "UnitPrice": _priceTEcontroller.text.trim(),
+    };
+
+    Response response = await post(uri,
+        headers: {"content-type": "aplication/json"},
+        body: jsonEncode(requestBody));
+
+    print(response.statusCode);
+    print(response.body);
+    _AddNewProductInProgress = false;
+    setState(() {});
+
+    if (response.statusCode == 200) {
+      _clearTextField();
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("New item added"),
+        ),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Add failed"),
+        ),
+      );
+    }
+  }
+
+  void _clearTextField() {
+    _nameTEcontroller.clear();
+    _codeTEcontroller.clear();
+    _priceTEcontroller.clear();
+    _totalPriceTEcontroller.clear();
+    _imageTEcontroller.clear();
+    _quantityTEcontroller.clear();
+  }
+
+  @override
+  void dispose() {
+    _nameTEcontroller.dispose();
+    _codeTEcontroller.dispose();
+    _priceTEcontroller.dispose();
+    _totalPriceTEcontroller.dispose();
+    _imageTEcontroller.dispose();
+    _quantityTEcontroller.dispose();
+    super.dispose();
   }
 }
