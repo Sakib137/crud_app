@@ -1,21 +1,39 @@
+import 'dart:convert';
+
+import 'package:crudapp/models/product.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 
 class UpdateProductScreen extends StatefulWidget {
-  const UpdateProductScreen({super.key});
+  const UpdateProductScreen({super.key, required this.product});
 
   static const String name = "/update-new-product";
 
+  final Product product;
+
   @override
-  State<UpdateProductScreen> createState() => _AddNewProductScreenState();
+  State<UpdateProductScreen> createState() => _UpdateProductScreenState();
 }
 
-class _AddNewProductScreenState extends State<UpdateProductScreen> {
+class _UpdateProductScreenState extends State<UpdateProductScreen> {
   final TextEditingController _nameTEcontroller = TextEditingController();
   final TextEditingController _priceTEcontroller = TextEditingController();
   final TextEditingController _totalPriceTEcontroller = TextEditingController();
   final TextEditingController _quantityTEcontroller = TextEditingController();
   final TextEditingController _imageTEcontroller = TextEditingController();
   final TextEditingController _codeTEcontroller = TextEditingController();
+  bool _UpdateProductInProgress = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _nameTEcontroller.text = widget.product.productName ?? "";
+    _priceTEcontroller.text = widget.product.unitPrice ?? "";
+    _totalPriceTEcontroller.text = widget.product.totalPrice ?? "";
+    _quantityTEcontroller.text = widget.product.quantity ?? "";
+    _imageTEcontroller.text = widget.product.image ?? "";
+    _codeTEcontroller.text = widget.product.id ?? "";
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -114,12 +132,71 @@ class _AddNewProductScreenState extends State<UpdateProductScreen> {
               }
             },
           ),
-          ElevatedButton(
-            onPressed: () {},
-            child: const Text("Update"),
+          Visibility(
+            visible: _UpdateProductInProgress == false,
+            replacement: const Center(
+              child: CircularProgressIndicator(),
+            ),
+            child: ElevatedButton(
+              onPressed: () {
+                _updateProduct();
+              },
+              child: const Text("Update"),
+            ),
           ),
         ],
       ),
     );
+  }
+
+  Future<void> _updateProduct() async {
+    _UpdateProductInProgress = true;
+    setState(() {});
+
+    Uri uri = Uri.parse(
+        "https://crud.teamrabbil.com/api/v1/UpdateProduct/${widget.product.id}");
+
+    Map<String, dynamic> requestBody = {
+      "Img": _imageTEcontroller.text.trim(),
+      "ProductCode": _codeTEcontroller.text.trim(),
+      "ProductName": _nameTEcontroller.text.trim(),
+      "Qty": _quantityTEcontroller.text.trim(),
+      "TotalPrice": _totalPriceTEcontroller.text.trim(),
+      "UnitPrice": _priceTEcontroller.text.trim(),
+    };
+
+    Response response = await post(
+      uri,
+      headers: {"content-type": "application/json"},
+      body: jsonEncode(requestBody),
+    );
+    print(response.statusCode);
+    print(response.body);
+    _UpdateProductInProgress = false;
+    setState(() {});
+    if (response.statusCode == 200) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Product has been updated"),
+        ),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Product has not updated"),
+        ),
+      );
+    }
+  }
+
+  @override
+  void dispose() {
+    _nameTEcontroller.dispose();
+    _codeTEcontroller.dispose();
+    _priceTEcontroller.dispose();
+    _totalPriceTEcontroller.dispose();
+    _imageTEcontroller.dispose();
+    _quantityTEcontroller.dispose();
+    super.dispose();
   }
 }

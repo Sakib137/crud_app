@@ -166,7 +166,7 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
 
     Response response = await post(
       uri,
-      headers: {"content-type": "aplication/json"},
+      headers: {"content-type": "application/json"},
       body: jsonEncode(requestBody),
     );
 
