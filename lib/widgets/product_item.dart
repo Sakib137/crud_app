@@ -3,11 +3,13 @@
 import 'package:crudapp/models/product.dart';
 import 'package:crudapp/screens/update_product_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:crudapp/models/delete_function.dart';
 
 class listItem extends StatelessWidget {
-  const listItem({super.key, required this.product});
+  const listItem({super.key, required this.product, required this.onRefresh});
 
   final Product product;
+  final Function() onRefresh;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,19 @@ class listItem extends StatelessWidget {
       trailing: Wrap(
         children: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              DeleteFunction.showDeleteConfirmation(
+                context: context,
+                id: product.id ?? '',
+                productName: product.productName ?? 'Unknown',
+                productCode: product.productCode ?? 'Unknown',
+                quantity: product.quantity?.toString() ?? 'Unknown',
+                price: product.unitPrice?.toString() ?? 'Unknown',
+                totalPrice: product.totalPrice?.toString() ?? 'Unknown',
+                imageUrl: product.image,
+                onDeleteSuccess: onRefresh, // Use the passed refresh function
+              );
+            },
             icon: const Icon(Icons.delete),
           ),
           IconButton(

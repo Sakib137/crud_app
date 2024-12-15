@@ -52,6 +52,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
               itemBuilder: (context, index) {
                 return listItem(
                   product: productList[index],
+                  onRefresh: () {},
                 );
               }),
         ),
