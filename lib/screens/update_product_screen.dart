@@ -23,6 +23,7 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
   final TextEditingController _imageTEcontroller = TextEditingController();
   final TextEditingController _codeTEcontroller = TextEditingController();
   bool _UpdateProductInProgress = false;
+  final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -52,10 +53,12 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
 
   Widget build_product_form() {
     return Form(
+      key: _formkey,
       child: Column(
         children: [
           TextFormField(
             controller: _nameTEcontroller,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
             decoration: const InputDecoration(
               label: Text("Product Name"),
             ),
@@ -69,6 +72,7 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
           ),
           TextFormField(
             controller: _priceTEcontroller,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
             decoration: const InputDecoration(
               label: Text("Product Price"),
             ),
@@ -82,6 +86,7 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
           ),
           TextFormField(
             controller: _totalPriceTEcontroller,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
             decoration: const InputDecoration(
               label: Text("Product Total Price"),
             ),
@@ -95,6 +100,7 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
           ),
           TextFormField(
             controller: _quantityTEcontroller,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
             decoration: const InputDecoration(
               label: Text("Product Quantity"),
             ),
@@ -108,6 +114,7 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
           ),
           TextFormField(
             controller: _imageTEcontroller,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
             decoration: const InputDecoration(
               label: Text("Product Image"),
             ),
@@ -121,6 +128,7 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
           ),
           TextFormField(
             controller: _codeTEcontroller,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
             decoration: const InputDecoration(
               label: Text("Product Code"),
             ),
@@ -132,6 +140,9 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
               }
             },
           ),
+          const SizedBox(
+            height: 50,
+          ),
           Visibility(
             visible: _UpdateProductInProgress == false,
             replacement: const Center(
@@ -139,9 +150,17 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
             ),
             child: ElevatedButton(
               onPressed: () {
-                _updateProduct();
+                if (_formkey.currentState!.validate()) {
+                  _updateProduct();
+                }
               },
-              child: const Text("Update"),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.green,
+              ),
+              child: const Text(
+                "Update",
+                style: TextStyle(color: Colors.white),
+              ),
             ),
           ),
         ],

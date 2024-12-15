@@ -131,6 +131,9 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
               }
             },
           ),
+          const SizedBox(
+            height: 50,
+          ),
           Visibility(
             visible: _AddNewProductInProgress == false,
             replacement: const Center(
@@ -142,7 +145,13 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                   _addNewProduct();
                 }
               },
-              child: const Text("Add"),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.green,
+              ),
+              child: const Text(
+                "Add",
+                style: TextStyle(color: Colors.white),
+              ),
             ),
           ),
         ],
