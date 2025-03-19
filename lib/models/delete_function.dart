@@ -31,13 +31,18 @@ class DeleteFunction {
       barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
+          backgroundColor: const Color.fromARGB(255, 78, 124, 216),
           title: const Text(
             'Are you sure? Will you delete this product?',
-            style: TextStyle(fontSize: 16),
+            style: TextStyle(
+              fontSize: 16,
+              color: Colors.white,
+              fontWeight: FontWeight.w500,
+            ),
           ),
           content: Container(
             decoration: BoxDecoration(
-              color: Colors.grey[100],
+              color: const Color.fromARGB(255, 129, 167, 243),
               borderRadius: BorderRadius.circular(8),
             ),
             padding: const EdgeInsets.all(16),
@@ -62,6 +67,7 @@ class DeleteFunction {
                         style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
+                          color: Color.fromARGB(255, 42, 1, 1),
                         ),
                       ),
                     ),
@@ -70,19 +76,27 @@ class DeleteFunction {
                 const SizedBox(height: 8),
                 Text(
                   'Product Code: $productCode',
-                  style: const TextStyle(color: Colors.grey),
+                  style: const TextStyle(
+                    color: Color.fromARGB(255, 42, 1, 1),
+                  ),
                 ),
                 Text(
                   'Quantity: $quantity',
-                  style: const TextStyle(color: Colors.grey),
+                  style: const TextStyle(
+                    color: Color.fromARGB(255, 42, 1, 1),
+                  ),
                 ),
                 Text(
                   'Price: $price',
-                  style: const TextStyle(color: Colors.grey),
+                  style: const TextStyle(
+                    color: Color.fromARGB(255, 42, 1, 1),
+                  ),
                 ),
                 Text(
                   'Total Price: $totalPrice',
-                  style: const TextStyle(color: Colors.grey),
+                  style: const TextStyle(
+                    color: Color.fromARGB(255, 42, 1, 1),
+                  ),
                 ),
               ],
             ),

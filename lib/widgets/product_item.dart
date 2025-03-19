@@ -18,14 +18,44 @@ class listItem extends StatelessWidget {
         product.image ?? "",
         width: 40,
       ),
-      title: Text("Item name: ${product.productName ?? ""}"),
+      title: Text(
+        "Item name: ${product.productName ?? ""}",
+        style: const TextStyle(
+          color: Color.fromARGB(255, 52, 2, 2),
+          fontWeight: FontWeight.w400,
+        ),
+      ),
       subtitle: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("Product Code: ${product.productCode ?? ""}"),
-          Text("Product Quantity: ${product.quantity ?? ""}"),
-          Text("Price: ${product.unitPrice ?? ""}"),
-          Text("Total price: ${product.totalPrice}"),
+          Text(
+            "Product Code: ${product.productCode ?? ""}",
+            style: const TextStyle(
+              color: Color.fromARGB(255, 52, 2, 2),
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+          Text(
+            "Product Quantity: ${product.quantity ?? ""}",
+            style: const TextStyle(
+              color: Color.fromARGB(255, 52, 2, 2),
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+          Text(
+            "Price: ${product.unitPrice ?? ""}",
+            style: const TextStyle(
+              color: Color.fromARGB(255, 52, 2, 2),
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+          Text(
+            "Total price: ${product.totalPrice}",
+            style: const TextStyle(
+              color: Color.fromARGB(255, 52, 2, 2),
+              fontWeight: FontWeight.w400,
+            ),
+          ),
         ],
       ),
       trailing: Wrap(
@@ -44,7 +74,10 @@ class listItem extends StatelessWidget {
                 onDeleteSuccess: onRefresh, // Use the passed refresh function
               );
             },
-            icon: const Icon(Icons.delete),
+            icon: const Icon(
+              Icons.delete,
+              color: Color.fromARGB(255, 77, 18, 14),
+            ),
           ),
           IconButton(
             onPressed: () {
@@ -54,7 +87,10 @@ class listItem extends StatelessWidget {
                 arguments: product,
               );
             },
-            icon: const Icon(Icons.edit),
+            icon: const Icon(
+              Icons.edit,
+              color: Color.fromARGB(255, 30, 82, 31),
+            ),
           ),
         ],
       ),

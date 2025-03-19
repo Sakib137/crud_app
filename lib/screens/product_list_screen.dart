@@ -27,41 +27,164 @@ class _ProductListScreenState extends State<ProductListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: Builder(builder: (BuildContext context) {
+          return IconButton(
+            icon: const Icon(
+              Icons.menu,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              Scaffold.of(context).openDrawer();
+            },
+          );
+        }),
+        backgroundColor: const Color.fromARGB(255, 1, 35, 66),
         title: const Center(
-          child: Text("Product List"),
+          child: Text(
+            "Product List",
+            style: TextStyle(color: Colors.white),
+          ),
         ),
         actions: [
           IconButton(
-              onPressed: () {
-                _getProductList();
-              },
-              icon: const Icon(Icons.refresh))
+            onPressed: () {
+              _getProductList();
+            },
+            icon: const Icon(
+              Icons.refresh,
+              color: Colors.white,
+              size: 24,
+            ),
+          ),
         ],
       ),
-      body: RefreshIndicator(
-        onRefresh: () async {
-          _getProductList();
-        },
-        child: Visibility(
-          visible: _getProductListInProgress == false,
-          replacement: const Center(
-            child: CircularProgressIndicator(),
-          ),
-          child: ListView.builder(
-              itemCount: productList.length,
-              itemBuilder: (context, index) {
-                return listItem(
-                  product: productList[index],
-                  onRefresh: () {},
+      drawer: Drawer(
+        backgroundColor: const Color.fromARGB(255, 141, 163, 171),
+        child: ListView(
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 1, 35, 66),
+              ),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    CircleAvatar(
+                      radius: 30,
+                      backgroundImage: AssetImage('assets/sakib1.jpg'),
+                    ),
+                    Text(
+                      'Md Sakib Al Hasan',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          overflow: TextOverflow.ellipsis),
+                    ),
+                    Text(
+                      'mdsakib124202@gmail.com',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            ListTile(
+              title: const Text(
+                "Home",
+                style: TextStyle(
+                  color: Color.fromARGB(255, 7, 1, 56),
+                ),
+              ),
+              leading: const Icon(
+                Icons.home,
+                color: Color.fromARGB(255, 43, 25, 0),
+              ),
+              onTap: () {
+                Navigator.push(
+                  (context),
+                  MaterialPageRoute(
+                    builder: (context) => const ProductListScreen(),
+                  ),
                 );
-              }),
+              },
+            ),
+            ListTile(
+              title: const Text(
+                "Add New Product",
+                style: TextStyle(
+                  color: Color.fromARGB(255, 7, 1, 56),
+                ),
+              ),
+              leading: const Icon(
+                Icons.add,
+                color: Color.fromARGB(255, 43, 25, 0),
+              ),
+              onTap: () {
+                Navigator.push(
+                  (context),
+                  MaterialPageRoute(
+                    builder: (context) => const AddNewProductScreen(),
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              title: const Text(
+                "Settings",
+                style: TextStyle(
+                  color: Color.fromARGB(255, 7, 1, 56),
+                ),
+              ),
+              leading: const Icon(
+                Icons.settings,
+                color: Color.fromARGB(255, 43, 25, 0),
+              ),
+              onTap: () {},
+            ),
+          ],
+        ),
+      ),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Color.fromARGB(255, 193, 191, 178),
+              Color.fromARGB(255, 113, 116, 152), // Dark blue at the top
+              Color.fromARGB(255, 23, 42, 59), // Lighter blue at the bottom
+            ],
+          ),
+        ),
+        child: RefreshIndicator(
+          onRefresh: () async {
+            _getProductList();
+          },
+          child: Visibility(
+            visible: _getProductListInProgress == false,
+            replacement: const Center(
+              child: CircularProgressIndicator(),
+            ),
+            child: ListView.builder(
+                itemCount: productList.length,
+                itemBuilder: (context, index) {
+                  return listItem(
+                    product: productList[index],
+                    onRefresh: () {},
+                  );
+                }),
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.pushNamed(context, AddNewProductScreen.name);
         },
-        child: const Icon(Icons.add),
+        backgroundColor: const Color.fromARGB(255, 1, 35, 66),
+        child: const Icon(Icons.add, color: Colors.white),
       ),
     );
   }

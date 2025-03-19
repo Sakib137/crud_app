@@ -40,27 +40,61 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: const Color.fromARGB(255, 1, 35, 66),
+        iconTheme: const IconThemeData(color: Colors.white),
         title: const Center(
-          child: Text("Update Product"),
+          child: Text(
+            "Update Product",
+            style: TextStyle(color: Colors.white),
+          ),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: build_product_form(),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Color.fromARGB(255, 193, 191, 178),
+              Color.fromARGB(255, 113, 116, 152), // Dark blue at the top
+              Color.fromARGB(255, 23, 42, 59), // Lighter blue at the bottom
+            ],
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: buildProductForm(),
+        ),
       ),
     );
   }
 
-  Widget build_product_form() {
+  Widget buildProductForm() {
     return Form(
       key: _formkey,
       child: Column(
         children: [
+          const SizedBox(
+            height: 10,
+          ),
           TextFormField(
             controller: _nameTEcontroller,
             autovalidateMode: AutovalidateMode.onUserInteraction,
-            decoration: const InputDecoration(
-              label: Text("Product Name"),
+            decoration: InputDecoration(
+              fillColor: const Color.fromARGB(255, 144, 140, 140),
+              filled: true,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: const BorderSide(
+                    color: Color.fromARGB(255, 218, 221, 19), width: 2),
+              ),
+              label: const Text(
+                "Product Name",
+                style: TextStyle(
+                  color: Color.fromARGB(255, 52, 2, 2),
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
             ),
             validator: (String? value) {
               if (value?.trim().isEmpty ?? true) {
@@ -70,11 +104,28 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
               }
             },
           ),
+          const SizedBox(
+            height: 12,
+          ),
           TextFormField(
             controller: _priceTEcontroller,
             autovalidateMode: AutovalidateMode.onUserInteraction,
-            decoration: const InputDecoration(
-              label: Text("Product Price"),
+            keyboardType: TextInputType.number,
+            decoration: InputDecoration(
+              fillColor: const Color.fromARGB(255, 144, 140, 140),
+              filled: true,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: const BorderSide(
+                    color: Color.fromARGB(255, 218, 221, 19), width: 2),
+              ),
+              label: const Text(
+                "Product Price",
+                style: TextStyle(
+                  color: Color.fromARGB(255, 52, 2, 2),
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
             ),
             validator: (String? value) {
               if (value?.trim().isEmpty ?? true) {
@@ -84,11 +135,28 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
               }
             },
           ),
+          const SizedBox(
+            height: 12,
+          ),
           TextFormField(
             controller: _totalPriceTEcontroller,
             autovalidateMode: AutovalidateMode.onUserInteraction,
-            decoration: const InputDecoration(
-              label: Text("Product Total Price"),
+            keyboardType: TextInputType.number,
+            decoration: InputDecoration(
+              fillColor: const Color.fromARGB(255, 144, 140, 140),
+              filled: true,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: const BorderSide(
+                    color: Color.fromARGB(255, 218, 221, 19), width: 2),
+              ),
+              label: const Text(
+                "Product Total Price",
+                style: TextStyle(
+                  color: Color.fromARGB(255, 52, 2, 2),
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
             ),
             validator: (String? value) {
               if (value?.trim().isEmpty ?? true) {
@@ -98,11 +166,28 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
               }
             },
           ),
+          const SizedBox(
+            height: 12,
+          ),
           TextFormField(
             controller: _quantityTEcontroller,
             autovalidateMode: AutovalidateMode.onUserInteraction,
-            decoration: const InputDecoration(
-              label: Text("Product Quantity"),
+            keyboardType: TextInputType.number,
+            decoration: InputDecoration(
+              fillColor: const Color.fromARGB(255, 144, 140, 140),
+              filled: true,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: const BorderSide(
+                    color: Color.fromARGB(255, 218, 221, 19), width: 2),
+              ),
+              label: const Text(
+                "Product Quantity",
+                style: TextStyle(
+                  color: Color.fromARGB(255, 52, 2, 2),
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
             ),
             validator: (String? value) {
               if (value?.trim().isEmpty ?? true) {
@@ -112,11 +197,27 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
               }
             },
           ),
+          const SizedBox(
+            height: 12,
+          ),
           TextFormField(
             controller: _imageTEcontroller,
             autovalidateMode: AutovalidateMode.onUserInteraction,
-            decoration: const InputDecoration(
-              label: Text("Product Image"),
+            decoration: InputDecoration(
+              fillColor: const Color.fromARGB(255, 144, 140, 140),
+              filled: true,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: const BorderSide(
+                    color: Color.fromARGB(255, 218, 221, 19), width: 2),
+              ),
+              label: const Text(
+                "Product Image",
+                style: TextStyle(
+                  color: Color.fromARGB(255, 52, 2, 2),
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
             ),
             validator: (String? value) {
               if (value?.trim().isEmpty ?? true) {
@@ -126,11 +227,27 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
               }
             },
           ),
+          const SizedBox(
+            height: 12,
+          ),
           TextFormField(
             controller: _codeTEcontroller,
             autovalidateMode: AutovalidateMode.onUserInteraction,
-            decoration: const InputDecoration(
-              label: Text("Product Code"),
+            decoration: InputDecoration(
+              fillColor: const Color.fromARGB(255, 144, 140, 140),
+              filled: true,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: const BorderSide(
+                    color: Color.fromARGB(255, 218, 221, 19), width: 2),
+              ),
+              label: const Text(
+                "Product Code",
+                style: TextStyle(
+                  color: Color.fromARGB(255, 52, 2, 2),
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
             ),
             validator: (String? value) {
               if (value?.trim().isEmpty ?? true) {
@@ -148,18 +265,22 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
             replacement: const Center(
               child: CircularProgressIndicator(),
             ),
-            child: ElevatedButton(
-              onPressed: () {
-                if (_formkey.currentState!.validate()) {
-                  _updateProduct();
-                }
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.green,
-              ),
-              child: const Text(
-                "Update",
-                style: TextStyle(color: Colors.white),
+            child: SizedBox(
+              height: 50,
+              width: 300,
+              child: ElevatedButton(
+                onPressed: () {
+                  if (_formkey.currentState!.validate()) {
+                    _updateProduct();
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color.fromARGB(255, 18, 56, 60),
+                ),
+                child: const Text(
+                  "Update",
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ),
